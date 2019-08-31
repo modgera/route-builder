@@ -1,3 +1,5 @@
+import arrayMove from "array-move";
+
 const pointReducer = (state, action) => {
   const actionInfo = action.info;
   switch (action.type) {
@@ -14,7 +16,7 @@ const pointReducer = (state, action) => {
       );
 
     case "CHANGE_POINT_ORDER":
-      return state;
+      return arrayMove(state, actionInfo.oldIndex, actionInfo.newIndex);
 
     case "DELETE_POINT":
       return state.filter(point => (point.id === actionInfo.id ? false : true));

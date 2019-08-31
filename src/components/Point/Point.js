@@ -6,26 +6,30 @@ import "./Point.css";
 
 import { PointsContext } from "../../contexts/Points/PointProvider";
 
-const Point = ({ id, coordinates, address, name }) => {
+const Point = ({ id, coordinates, address, name, ymap, iconColor, index }) => {
   const options = {
     draggable: true,
     preset: "islands#circleIcon",
-    balloonMinWidth: 100
+    balloonMinWidth: 100,
+    iconColor: iconColor
   };
 
   const properties = {
     balloonContentHeader: name,
-    balloonContent: address
+    balloonContent: address,
+    iconContent: index
   };
   const modules = ["geoObject.addon.balloon"];
 
   const { dispatchPoints } = useContext(PointsContext);
-  //useCallback ?
   const onPointDragEnd = event => {
     const newCoordinates = event.originalEvent.target.geometry.getCoordinates();
-    dispatchPoints({
-      type: "CHANGE_POINT_INFO",
-      info: { id, coordinates: newCoordinates }
+    ymap.geocode(coordinates).then(res => {
+      const firstGeoObject = res.geoObjects.get(0);
+      dispatchPoints({
+        type: "CHANGE_POINT_INFO",
+        info: { id, coordinates: newCoordinates, address: firstGeoObject.getAddressLine() }
+      });
     });
   };
 

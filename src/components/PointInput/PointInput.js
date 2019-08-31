@@ -10,16 +10,11 @@ const PointInput = ({ map, ymap }) => {
   const onPointNameChange = e => {
     setPointName(e.target.value);
   };
-  const getAddressFromCoordinate = async coordinates => {
-    const coordinatesGeoInfo = await ymap.geocode(coordinates);
-    //const geoInfo = Promise.all(coordinatesGeoInfo);
-    return coordinatesGeoInfo;
-  };
 
-  const onPointKeyUp = e => {
+  const getAddressFromCoordinate = e => {
     if (e.keyCode === 13) {
       const coordinates = map.getCenter();
-      const address = ymap.geocode(coordinates).then(res => {
+      ymap.geocode(coordinates).then(res => {
         const firstGeoObject = res.geoObjects.get(0);
         const info = {
           address: firstGeoObject.getAddressLine(),
@@ -28,9 +23,7 @@ const PointInput = ({ map, ymap }) => {
           coordinates: coordinates
         };
         dispatchPoints({ type: "ADD_POINT", info });
-        // firstGeoObject.getLocalities().length
-        //     ? firstGeoObject.getAddressLine()
-        //     : firstGeoObject.getAdministrativeAreas()
+        setPointName("");
       });
     }
   };
@@ -41,7 +34,7 @@ const PointInput = ({ map, ymap }) => {
         className="point-input"
         value={pointName}
         onChange={onPointNameChange}
-        onKeyUp={onPointKeyUp}
+        onKeyUp={getAddressFromCoordinate}
       />
     </div>
   );
