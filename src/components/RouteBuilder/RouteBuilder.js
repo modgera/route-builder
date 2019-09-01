@@ -32,6 +32,7 @@ const RouteBuilder = () => {
   const [ymap, setУMap] = useState(null);
   const [centerPoint, setCenterPoint] = useState(null);
   const [load, setLoader] = useState(true);
+  const [center, setCenter] = useState(null);
 
   const configureMap = map => {
     if (map) {
@@ -52,8 +53,10 @@ const RouteBuilder = () => {
       ymap.geolocation.get().then(function(res) {
         const bounds = res.geoObjects.get(0).properties.get("boundedBy");
         const mapState = ymap.util.bounds.getCenter(bounds);
-        //setCenter(mapState);
-        map.setCenter(mapState);
+        if (!center) {
+          setCenter(mapState);
+          map.setCenter(mapState);
+        }
         setLoader(false);
       });
     }
