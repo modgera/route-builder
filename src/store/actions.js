@@ -1,0 +1,8 @@
+const actionTypes = {
+  ADD_POINT: "ADD_POINT",
+  CHANGE_POINT_INFO: "CHANGE_POINT_INFO",
+  CHANGE_POINT_ORDER: "CHANGE_POINT_ORDER",
+  DELETE_POINT: "DELETE_POINT"
+};
+
+export default actionTypes;

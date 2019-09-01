@@ -1,13 +1,13 @@
 import React from "react";
 
-import { PointProvider } from "./contexts/Points/PointProvider";
+import { Store } from "./store/provider";
 import RouteBuilder from "./components/RouteBuilder";
 
 const App = () => {
   return (
-    <PointProvider>
+    <Store>
       <RouteBuilder />
-    </PointProvider>
+    </Store>
   );
 };
 

@@ -4,15 +4,14 @@ import { Placemark } from "react-yandex-maps";
 
 import "./Point.css";
 
-import { PointsContext } from "../../contexts/Points/PointProvider";
+import { GlobalContext } from "../../store/provider";
+import actions from "../../store/actions";
+import { pointOptions } from "../../config";
 
-const Point = ({ id, coordinates, address, name, ymap, iconColor, index }) => {
-  const options = {
-    draggable: true,
-    preset: "islands#circleIcon",
-    balloonMinWidth: 100,
-    iconColor: iconColor
-  };
+const Point = props => {
+  const { id, coordinates, address, name, ymap, index } = props;
+
+  const options = props.options ? Object.assign(props.options, pointOptions) : pointOptions;
 
   const properties = {
     balloonContentHeader: name,
@@ -21,13 +20,14 @@ const Point = ({ id, coordinates, address, name, ymap, iconColor, index }) => {
   };
   const modules = ["geoObject.addon.balloon"];
 
-  const { dispatchPoints } = useContext(PointsContext);
+  const { dispatch } = useContext(GlobalContext);
+
   const onPointDragEnd = event => {
     const newCoordinates = event.originalEvent.target.geometry.getCoordinates();
     ymap.geocode(coordinates).then(res => {
       const firstGeoObject = res.geoObjects.get(0);
-      dispatchPoints({
-        type: "CHANGE_POINT_INFO",
+      dispatch({
+        type: actions.CHANGE_POINT_INFO,
         info: { id, coordinates: newCoordinates, address: firstGeoObject.getAddressLine() }
       });
     });
@@ -48,7 +48,10 @@ Point.propTypes = {
   id: PropTypes.string,
   coordinates: PropTypes.arrayOf(PropTypes.number),
   address: PropTypes.string,
-  name: PropTypes.string
+  name: PropTypes.string,
+  iconColor: PropTypes.string,
+  index: PropTypes.number,
+  options: PropTypes.object
 };
 
 export default Point;

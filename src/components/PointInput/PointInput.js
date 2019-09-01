@@ -2,17 +2,19 @@ import React, { useState, useContext } from "react";
 import { v1 as uuid } from "uuid";
 import "./PointInput.css";
 
-import { PointsContext } from "../../contexts/Points/PointProvider";
+import { GlobalContext } from "../../store/provider";
+import actions from "../../store/actions";
 
 const PointInput = ({ map, ymap }) => {
-  const { dispatchPoints } = useContext(PointsContext);
+  const { dispatch } = useContext(GlobalContext);
   const [pointName, setPointName] = useState("");
+
   const onPointNameChange = e => {
     setPointName(e.target.value);
   };
 
   const getAddressFromCoordinate = e => {
-    if (e.keyCode === 13) {
+    if (e.keyCode === 13 && pointName.length > 0) {
       const coordinates = map.getCenter();
       ymap.geocode(coordinates).then(res => {
         const firstGeoObject = res.geoObjects.get(0);
@@ -22,7 +24,7 @@ const PointInput = ({ map, ymap }) => {
           name: pointName,
           coordinates: coordinates
         };
-        dispatchPoints({ type: "ADD_POINT", info });
+        dispatch({ type: actions.ADD_POINT, info });
         setPointName("");
       });
     }
