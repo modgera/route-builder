@@ -6,12 +6,11 @@ import RouteBuilder from "./components/RouteBuilder";
 import YMaps from "./components/Draft/YMaps";
 
 const App = () => {
-  // return (
-  //   <Store>
-  //     <RouteBuilder />
-  //   </Store>
-  // );
-  return <YMaps />;
+  return (
+    <Store>
+      <RouteBuilder />
+    </Store>
+  );
 };
 
 export default App;
