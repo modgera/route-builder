@@ -38,6 +38,20 @@ const globalReducer = (state, action) => {
       };
     }
 
+    case actions.SET_MAP_API: {
+      return {
+        ...state,
+        api: info.api
+      };
+    }
+
+    case actions.SET_MAP: {
+      return {
+        ...state,
+        map: info.map
+      };
+    }
+
     default:
       return state;
   }

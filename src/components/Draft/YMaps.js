@@ -6,19 +6,18 @@ import "./style.css";
 
 const YMaps = () => {
   const [ymaps, setYmaps] = useState(null);
-
-  const url =
-    "https://api-maps.yandex.ru/2.1/?apikey=1c3beb93-8646-40be-aad5-14816f0a463d&lang=ru_RU";
+  const [map, setMap] = useState(null);
 
   useEffect(() => {
-    loadDynamicScript("YandexMap", url, ymaps => setYmaps(ymaps));
+    loadDynamicScript("YandexMap", ymaps => setYmaps(ymaps));
   }, []);
 
   const createMap = ymaps => {
-    new ymaps.Map("YMapsID", {
+    const map = new ymaps.Map("YMapsID", {
       center: [55.76, 37.64],
       zoom: 10
     });
+    setMap(map);
   };
 
   if (ymaps) {

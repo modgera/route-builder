@@ -1,10 +1,16 @@
-const loadDynamicScript = (scriptID, src, callback) => {
+import scriptUrl from '../'
+
+
+const url =
+    "https://api-maps.yandex.ru/2.1/?apikey=1c3beb93-8646-40be-aad5-14816f0a463d&lang=ru_RU";
+
+const loadDynamicScript = (scriptID, callback) => {
   if (!callback) return false;
 
   const existingScript = document.getElementById(scriptID);
   if (!existingScript) {
     const script = document.createElement("script");
-    script.src = src;
+    script.src = url;
     script.id = scriptID;
     document.head.appendChild(script);
 
