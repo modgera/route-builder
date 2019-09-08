@@ -1,38 +1,13 @@
+import Map from "./GeoObjects/Map";
+import Utils from "./GeoObjects/Utils";
+import Marker from "./GeoObjects/Marker";
+import Polyline from "./GeoObjects/Polyline";
+
 export default class YandexMaps {
   constructor(api) {
-    this.ymaps = api;
-    this.map = null;
+    this.Map = new Map(this, api);
+    this.Utils = new Utils(this, api);
+    this.Marker = new Marker(this, api);
+    this.Polyline = new Polyline(this, api);
   }
-
-  //need catch and return default location
-  getUserLocation = async () => {
-    const locationInfo = await this.ymaps.geolocation.get();
-    const bounds = locationInfo.geoObjects.get(0).properties.get("boundedBy");
-    return this.ymaps.util.bounds.getCenter(bounds);
-  };
-
-  createMap = (containerName, callback) => {
-    this.getUserLocation().then(coord => {
-      const map = new this.ymaps.Map(containerName, {
-        center: coord,
-        zoom: 12
-      });
-      callback(map);
-    });
-  };
-
-  addPoint = map => {
-    const coord = map.getCenter();
-    console.log(coord);
-  };
-  // onPointDragEnd = event => {
-  //   const newCoordinates = event.originalEvent.target.geometry.getCoordinates();
-  //   ymap.geocode(coordinates).then(res => {
-  //     const firstGeoObject = res.geoObjects.get(0);
-  //     dispatch({
-  //       type: actions.CHANGE_POINT_INFO,
-  //       info: { id, coordinates: newCoordinates, address: firstGeoObject.getAddressLine() }
-  //     });
-  //   });
-  // };
 }

@@ -7,5 +7,7 @@ export const getMapService = (apiName, callback) => {
       break;
     case "Google":
       break;
+    default:
+      return null;
   }
 };

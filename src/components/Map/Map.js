@@ -17,7 +17,7 @@ const Map = () => {
     //getUserLocation(state.api, setLocation);
     //if (location) {
     if (state.api) {
-      const map = state.api.createMap("map-container", setMapToState);
+      const map = state.api.Map.createMap("map-container", setMapToState);
     }
 
     //}
