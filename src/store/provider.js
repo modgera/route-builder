@@ -6,10 +6,10 @@ import { getMapService } from "../services/getMapService";
 
 const GlobalContext = createContext(null);
 
-const Store = ({ children }) => {
+const Store = ({ children, apiName = "Google" }) => {
   const initialState = {
     api: null,
-    apiName: "Yandex",
+    apiName: apiName,
     map: null,
     loading: true,
     points: []

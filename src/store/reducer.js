@@ -45,10 +45,11 @@ const globalReducer = (state, action) => {
       };
     }
 
-    case actions.SET_MAP: {
+    case actions.CHANGE_API: {
       return {
         ...state,
-        map: info.map
+        apiName: info.apiName,
+        api: null
       };
     }
 
