@@ -5,9 +5,10 @@ export const yandexMapsParams = {
   lang: "ru_RU"
 };
 
+export const defaultMapCenter = [55.75, 37.57];
+
 export const defaultMapState = {
-  center: [55.75, 37.57],
-  zoom: 12,
+  zoom: 10,
   controls: []
 };
 

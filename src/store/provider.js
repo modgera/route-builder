@@ -6,7 +6,7 @@ import { getMapService } from "../services/getMapService";
 
 const GlobalContext = createContext(null);
 
-const Store = ({ children, apiName = "Google" }) => {
+const Store = ({ children, apiName = "Yandex" }) => {
   const initialState = {
     api: null,
     apiName: apiName,
