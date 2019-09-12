@@ -1,5 +1,5 @@
-import { loadYandexScript } from "./Yandex/constructor";
-import { loadGoogleScript } from "./Google/constructor";
+import { loadYandexScript } from "./Yandex/scriptLoader";
+import { loadGoogleScript } from "./Google/scriptLoader";
 export const getMapService = (apiName, callback) => {
   switch (apiName) {
     case "Yandex":
