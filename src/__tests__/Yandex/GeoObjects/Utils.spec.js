@@ -1,4 +1,6 @@
+"use strict";
 import { loadYandexScript } from "../../../services/Yandex/scriptLoader.js";
+import "../../../jsdomInit";
 
 // describe("Yandex Map Utils", () => {
 //   const callback = MapService => {
@@ -10,12 +12,13 @@ import { loadYandexScript } from "../../../services/Yandex/scriptLoader.js";
 //   };
 //   loadYandexScript("YandexScript", callback);
 // });
-
-test("getUserLocation", () => {
+jest.setTimeout(10000);
+test("getUserLocation", done => {
   const callback = async MapService => {
     const coordinates = await MapService.Utils.getUserLocation();
     expect(coordinates).toBeDefined();
-    expect(coordinates.length).toBe(2);
+    expect(coordinates.length).toBe(3);
+    done();
   };
   loadYandexScript("YandexScript", callback);
 });

@@ -7,7 +7,11 @@ export const loadYandexScript = (scriptID, callback) => {
     const script = document.createElement("script");
     script.src = getYandexUrl();
     script.id = scriptID;
-    script.onload = () => handleOnLoadMap(callback);
+    if (callback !== undefined) {
+      console.log("callback here");
+      script.onload = () => handleOnLoadMap(callback);
+    }
+    //script.addEventListener("load", () => handleOnLoadMap(callback));
     document.head.appendChild(script);
   } else {
     handleOnLoadMap(callback);

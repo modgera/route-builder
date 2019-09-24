@@ -14,7 +14,7 @@ const Map = () => {
 
   useEffect(() => {
     if (state.api) {
-      const map = state.api.Map.createMap("map-container", setMapToState);
+      state.api.Map.createMap("map-container", setMapToState);
     }
   }, [state.api]);
 
