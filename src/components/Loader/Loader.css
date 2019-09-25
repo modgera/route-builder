@@ -26,6 +26,12 @@
   }
 }
 
+.lds-css {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .lds-spin {
   position: relative;
 }

@@ -59,6 +59,15 @@ const globalReducer = (state, action) => {
       };
     }
 
+    case actions.SET_MAP: {
+      const { map, loading } = info;
+      return {
+        ...state,
+        map,
+        loading,
+      };
+    }
+
     default:
       return state;
   }

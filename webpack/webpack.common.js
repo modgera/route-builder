@@ -20,9 +20,17 @@ module.exports = {
             loader: 'css-loader',
             options: {
               importLoaders: 1,
-              modules: true,
+              // modules: true,
               exportOnlyLocals: false,
             },
+          },
+        ],
+      },
+      {
+        test: /\.(png|jpg|gif|svg)$/i,
+        use: [
+          {
+            loader: 'url-loader',
           },
         ],
       },
