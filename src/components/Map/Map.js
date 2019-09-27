@@ -1,8 +1,10 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, Fragment } from 'react';
 
 import { GlobalContext } from '../../store/provider';
 import actions from '../../store/actions';
 import CenterMarker from '../CenterMarker';
+import GeoMarkerList from '../GeoMarkerList';
+import MapRoute from '../MapRoute';
 
 import './Map.css';
 
@@ -18,15 +20,21 @@ const Map = () => {
   };
 
   useEffect(() => {
-    console.log(state.map);
     if (state.api && !state.map) {
       state.api.Map.createMap(containerId, setMapToState);
     }
   }, [state.api]);
 
+  const content = state.map ? (
+    <Fragment>
+      <CenterMarker />
+      <GeoMarkerList />
+      <MapRoute />
+    </Fragment>
+  ) : null;
   return (
     <div id={containerId} className="map-container">
-      <CenterMarker />
+      {content}
     </div>
   );
 };

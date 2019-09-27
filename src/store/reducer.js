@@ -13,9 +13,7 @@ const globalReducer = (state, action) => {
     }
 
     case actions.CHANGE_POINT_INFO: {
-      const points = state.points.map(point =>
-        point.id === info.id ? Object.assign(point, info) : point
-      );
+      const points = state.points.map(point => (point.id === info.id ? Object.assign(point, info) : point));
       return {
         ...state,
         points,
@@ -23,11 +21,7 @@ const globalReducer = (state, action) => {
     }
 
     case actions.CHANGE_POINT_ORDER: {
-      const points = arrayMove(
-        state.points,
-        info.oldIndex,
-        info.newIndex
-      );
+      const points = arrayMove(state.points, info.oldIndex, info.newIndex);
       return {
         ...state,
         points,
@@ -35,9 +29,7 @@ const globalReducer = (state, action) => {
     }
 
     case actions.DELETE_POINT: {
-      const points = state.points.filter(
-        point => point.id !== info.id
-      );
+      const points = state.points.filter(point => point.id !== info.id);
       return {
         ...state,
         points,
@@ -45,17 +37,22 @@ const globalReducer = (state, action) => {
     }
 
     case actions.SET_MAP_API: {
+      const { api, apiName } = info;
       return {
         ...state,
-        api: info.api,
+        api,
+        apiName,
       };
     }
 
     case actions.CHANGE_API: {
+      const { apiName, loading } = info;
       return {
         ...state,
-        apiName: info.apiName,
+        apiName,
+        loading,
         api: null,
+        map: null,
       };
     }
 

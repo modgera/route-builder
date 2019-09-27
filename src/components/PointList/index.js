@@ -1,3 +1,3 @@
-import PointList from "./PointList";
+import PointList from './PointList';
 
 export default PointList;

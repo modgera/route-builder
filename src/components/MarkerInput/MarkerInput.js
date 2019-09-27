@@ -16,15 +16,11 @@ const MarkerInput = () => {
   const addNewMarkerCallback = info => {
     dispatch({ type: actions.ADD_POINT, info });
     setPointName('');
-    console.log(info);
   };
+
   const addNewMarker = e => {
     if (e.keyCode === 13 && pointName.length > 0) {
-      api.Utils.getAddressFromCoordinate(
-        pointName,
-        map,
-        addNewMarkerCallback
-      );
+      api.Utils.getPointInfo(pointName, map, addNewMarkerCallback);
     }
   };
 

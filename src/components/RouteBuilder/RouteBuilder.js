@@ -3,6 +3,7 @@ import ApiSwitcher from '../ApiSwitcher';
 import Loader from '../Loader';
 import Map from '../Map';
 import MarkerInput from '../MarkerInput';
+import PointList from '../PointList';
 
 import { GlobalContext } from '../../store/provider';
 import './RouteBuilder.css';
@@ -10,9 +11,7 @@ import './RouteBuilder.css';
 const RouteBuilder = () => {
   const { state } = useContext(GlobalContext);
   const loader = state.loading ? <Loader /> : null;
-  const containerClass = state.loading
-    ? 'route-builder_disable'
-    : 'route-builder';
+  const containerClass = state.loading ? 'route-builder_disable' : 'route-builder';
   return (
     <Fragment>
       {loader}
@@ -20,6 +19,7 @@ const RouteBuilder = () => {
         <ApiSwitcher />
         <MarkerInput />
         <Map />
+        <PointList />
       </div>
     </Fragment>
   );

@@ -1,15 +1,39 @@
-import React, { useContext } from "react";
-import PropTypes from "prop-types";
-import { SortableContainer, SortableElement } from "react-sortable-hoc";
+import React, { useContext } from 'react';
+import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 
-import "./PointList.css";
+import './PointList.css';
 
-import { GlobalContext } from "../../store/provider";
-import actions from "../../store/actions";
+import { GlobalContext } from '../../store/provider';
+import actions from '../../store/actions';
 
-const PointList = ({ map }) => {
-  const { state, dispatch } = useContext(GlobalContext);
-  const { points } = state;
+const PointList = () => {
+  const {
+    state: { map, points },
+    dispatch,
+  } = useContext(GlobalContext);
+
+  const moveToPoint = key => {
+    const [point] = points.filter(point => point.id === key);
+    map.panTo(point.coordinates);
+  };
+
+  const createPointClickHandler = key => {
+    return () => moveToPoint(key);
+  };
+
+  const createOnKeyUpHandler = key => {
+    return e => {
+      if (e.keyCode === 13) {
+        moveToPoint(key);
+      }
+    };
+  };
+
+  const createDeletePointHandler = id => {
+    return () => {
+      dispatch({ type: actions.DELETE_POINT, info: { id } });
+    };
+  };
 
   const SortableList = SortableContainer(({ items }) => {
     return (
@@ -21,25 +45,27 @@ const PointList = ({ map }) => {
     );
   });
 
-  const SortableItem = SortableElement(({ value, sortIndex }) => (
-    <li data-index={sortIndex} onClick={createPointClickHandler(value.id)}>
-      {sortIndex + 1} - {value.name}
-      <button onClick={createDeletePointHandler(value.id)}>X</button>
-    </li>
-  ));
+  const SortableItem = SortableElement(({ value, sortIndex }) => {
+    const { id, name } = value;
+    const markerTitle = `${sortIndex + 1} - ${name}`;
+    return (
+      <li>
+        <div
+          role="button"
+          tabIndex="0"
+          data-index={sortIndex}
+          onClick={createPointClickHandler(id)}
+          onKeyUp={createOnKeyUpHandler(id)}
+        >
+          {markerTitle}
+        </div>
 
-  const createPointClickHandler = key => {
-    return () => {
-      const coordinates = points.filter(point => (point.id === key ? true : false))[0].coordinates;
-      map.panTo(coordinates);
-    };
-  };
-
-  const createDeletePointHandler = id => {
-    return () => {
-      dispatch({ type: actions.DELETE_POINT, info: { id } });
-    };
-  };
+        <button type="button" onClick={createDeletePointHandler(id)}>
+          X
+        </button>
+      </li>
+    );
+  });
 
   const onSortEnd = ({ oldIndex, newIndex }) => {
     dispatch({ type: actions.CHANGE_POINT_ORDER, info: { oldIndex, newIndex } });
@@ -49,7 +75,3 @@ const PointList = ({ map }) => {
 };
 
 export default PointList;
-
-PointList.propTypes = {
-  points: PropTypes.PropTypes.arrayOf(PropTypes.object)
-};

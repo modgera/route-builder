@@ -8,7 +8,7 @@ export const yandexMapsParams = {
 export const defaultMapCenter = [55.75, 37.57];
 
 export const configMapState = {
-  zoom: 10,
+  zoom: 11,
   controls: [],
 };
 

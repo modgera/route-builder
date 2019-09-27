@@ -3,9 +3,14 @@ import { GlobalContext } from '../../store/provider';
 import actions from '../../store/actions';
 
 const ApiSwitcher = () => {
-  const { dispatch } = useContext(GlobalContext);
+  const { state, dispatch } = useContext(GlobalContext);
   const setNewApi = apiName => {
-    dispatch({ type: actions.CHANGE_API, info: { apiName } });
+    if (state.apiName !== apiName) {
+      dispatch({
+        type: actions.CHANGE_API,
+        info: { apiName, loading: true },
+      });
+    }
   };
   return (
     <div>

@@ -1,3 +1,3 @@
-import MapRoute from "./MapRoute";
+import MapRoute from './MapRoute';
 
 export default MapRoute;
