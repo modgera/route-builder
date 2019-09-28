@@ -4,6 +4,7 @@ import Loader from '../Loader';
 import Map from '../Map';
 import MarkerInput from '../MarkerInput';
 import PointList from '../PointList';
+import CleanPoints from '../CleanPoints';
 
 import { GlobalContext } from '../../store/provider';
 import './RouteBuilder.css';
@@ -17,6 +18,7 @@ const RouteBuilder = () => {
       {loader}
       <div className={containerClass}>
         <ApiSwitcher />
+        <CleanPoints />
         <MarkerInput />
         <Map />
         <PointList />

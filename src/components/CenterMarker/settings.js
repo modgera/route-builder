@@ -19,7 +19,8 @@ const getOptions = apiName => {
         iconImageHref: crossImg,
         iconImageSize: [20, 20],
         iconImageOffset: [-10, -10],
-        zIndex: 999,
+        zIndex: -999,
+        cursor: 'none',
       };
     case 'Google':
       return {};

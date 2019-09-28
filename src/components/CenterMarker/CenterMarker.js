@@ -12,7 +12,7 @@ const CenterMarker = () => {
       const params = getProperties(apiName);
       api.Marker.addCenterMarkerToMap(map, options, params);
     }
-  });
+  }, [map]);
   return null;
 };
 

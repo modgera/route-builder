@@ -26,6 +26,17 @@ const onDragEndEventHandler = (event, ymaps, id, callback) => {
   });
 };
 
+const changeMarkerParams = (marker, params, paramsName) => {
+  const markerParams = marker[paramsName];
+  Object.keys(params).forEach(key => {
+    const currentParamValue = markerParams.get(key);
+    const newParamValue = params[key];
+    if (currentParamValue !== newParamValue) {
+      markerParams.set(key, params[key]);
+    }
+  });
+};
+
 export default class Marker extends GeoObject {
   createMarker = (map, options = {}, props = {}, coordinates = []) => {
     const markerCoordinates = getMarkerCoordinate(coordinates, map);
@@ -47,10 +58,18 @@ export default class Marker extends GeoObject {
     marker.events.add('dragend', e => onDragEndEventHandler(e, this.ymaps, id, callback));
   };
 
-  clean = map => {
-    // const { geoObjects } = map;
-    // const removeCount = geoObjects.getLength() - 1;
-    // map.geoObjects.splice(1, removeCount);
-    map.geoObjects.removeAll();
+  changeMarker = (marker, options, properties) => {
+    changeMarkerParams(marker, options, 'options');
+    changeMarkerParams(marker, properties, 'properties');
+    // Object.keys(options).forEach(key => {
+    //   marker.options.set(key, options[key]);
+    // });
+    // Object.keys(properties).forEach(key => {
+    //   marker.properties.set(key, properties[key]);
+    // });
+  };
+
+  deleteMarker = (map, marker) => {
+    map.geoObjects.remove(marker);
   };
 }

@@ -20,6 +20,18 @@ const getProperties = (apiName, point, info) => {
   }
 };
 
+const getChangingProperties = (apiName, info) => {
+  const { index } = info;
+  switch (apiName) {
+    case 'Yandex':
+      return { iconContent: index };
+    case 'Google':
+      return {};
+    default:
+      return {};
+  }
+};
+
 const getOptions = (apiName, info) => {
   const { index, lastIndex } = info;
   const iconColor = getIconColor(index, lastIndex);
@@ -38,4 +50,17 @@ const getOptions = (apiName, info) => {
   }
 };
 
-export { getProperties, getOptions };
+const getChangingOptions = (apiName, info) => {
+  const { index, lastIndex } = info;
+  const iconColor = getIconColor(index, lastIndex);
+  switch (apiName) {
+    case 'Yandex':
+      return { iconColor };
+    case 'Google':
+      return {};
+    default:
+      return {};
+  }
+};
+
+export { getProperties, getOptions, getChangingOptions, getChangingProperties };

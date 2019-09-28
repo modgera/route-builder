@@ -36,6 +36,13 @@ const globalReducer = (state, action) => {
       };
     }
 
+    case actions.DELETE_POINTS: {
+      return {
+        ...state,
+        points: [],
+      };
+    }
+
     case actions.SET_MAP_API: {
       const { api, apiName } = info;
       return {
