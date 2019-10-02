@@ -13,63 +13,60 @@ const getMarkerCoordinate = (coordinates, map) => {
   return map.getCenter();
 };
 
-const onDragEndEventHandler = (event, ymaps, id, callback) => {
-  const newCoordinates = event.originalEvent.target.geometry.getCoordinates();
-  ymaps.geocode(newCoordinates).then(res => {
-    const firstGeoObject = res.geoObjects.get(0);
-    const info = {
-      id,
-      coordinates: newCoordinates,
-      address: firstGeoObject.getAddressLine(),
-    };
-    callback(info);
-  });
-};
-
 const changeMarkerParams = (marker, params, paramsName) => {
   const markerParams = marker[paramsName];
-  Object.keys(params).forEach(key => {
-    const currentParamValue = markerParams.get(key);
-    const newParamValue = params[key];
-    if (currentParamValue !== newParamValue) {
-      markerParams.set(key, params[key]);
-    }
-  });
+  if (markerParams) {
+    Object.keys(params).forEach(key => {
+      const currentParamValue = markerParams.get(key);
+      const newParamValue = params[key];
+      if (currentParamValue !== newParamValue) {
+        markerParams.set(key, params[key]);
+      }
+    });
+  }
 };
 
 export default class Marker extends GeoObject {
-  createMarker = (map, options = {}, props = {}, coordinates = []) => {
+  createMarker = (map, params = {}, coordinates = []) => {
+    const { options, properties } = params;
     const markerCoordinates = getMarkerCoordinate(coordinates, map);
-    const marker = new this.ymaps.Placemark(markerCoordinates, props, options);
+    const marker = new this.ymaps.Placemark(markerCoordinates, properties, options);
+    map.geoObjects.add(marker);
     return marker;
   };
 
-  addMarkerToMap = (map, marker) => {
-    map.geoObjects.add(marker);
+  addCenterMarkerToMap = (map, options = {}) => {
+    const centerMarker = this.createMarker(map, options);
+    map.events.add('actiontickcomplete', () => onChangeMapCenterHandler(map, centerMarker));
+    map.geoObjects.add(centerMarker);
   };
 
-  addCenterMarkerToMap = (map, options = {}, props = {}) => {
-    const centerMarker = this.createMarker(map, options, props);
-    map.events.add('actiontickcomplete', () => onChangeMapCenterHandler(map, centerMarker));
-    this.addMarkerToMap(map, centerMarker);
+  onDragEndEventHandler = async (event, id, callback) => {
+    const newCoordinates = event.originalEvent.target.geometry.getCoordinates();
+    const address = await this.master.Utils.getAddress(newCoordinates);
+    const info = {
+      id,
+      coordinates: newCoordinates,
+      address,
+    };
+    callback(info);
   };
 
   addOnDragEndEvent = (marker, id, callback) => {
-    marker.events.add('dragend', e => onDragEndEventHandler(e, this.ymaps, id, callback));
+    marker.events.add('dragend', e => this.onDragEndEventHandler(e, id, callback));
   };
 
-  changeMarker = (marker, options, properties) => {
-    changeMarkerParams(marker, options, 'options');
-    changeMarkerParams(marker, properties, 'properties');
-    // Object.keys(options).forEach(key => {
-    //   marker.options.set(key, options[key]);
-    // });
-    // Object.keys(properties).forEach(key => {
-    //   marker.properties.set(key, properties[key]);
-    // });
+  changeMarker = (marker, params = {}) => {
+    const { options, properties } = params;
+    if (options) {
+      changeMarkerParams(marker, options, 'options');
+    }
+    if (properties) {
+      changeMarkerParams(marker, properties, 'properties');
+    }
   };
 
-  deleteMarker = (map, marker) => {
+  deleteMarker = (marker, map) => {
     map.geoObjects.remove(marker);
   };
 }

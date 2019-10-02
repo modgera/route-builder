@@ -44,11 +44,12 @@ const globalReducer = (state, action) => {
     }
 
     case actions.SET_MAP_API: {
-      const { api, apiName } = info;
+      const { api, apiName, points } = info;
       return {
         ...state,
         api,
         apiName,
+        points,
       };
     }
 

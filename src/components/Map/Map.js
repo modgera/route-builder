@@ -5,12 +5,13 @@ import actions from '../../store/actions';
 import CenterMarker from '../CenterMarker';
 import GeoMarkerList from '../GeoMarkerList';
 import MapRoute from '../MapRoute';
+import { getOptions, CONTAINER_ID } from './settings';
 
 import './Map.css';
 
 const Map = () => {
   const { state, dispatch } = useContext(GlobalContext);
-  const containerId = 'map-container';
+  const { api, apiName, map, loading } = state;
 
   const setMapToState = map => {
     dispatch({
@@ -20,20 +21,22 @@ const Map = () => {
   };
 
   useEffect(() => {
-    if (state.api && !state.map) {
-      state.api.Map.createMap(containerId, setMapToState);
+    if (api && !map) {
+      const options = getOptions(apiName);
+      api.Map.createMap(CONTAINER_ID, setMapToState, options);
     }
-  }, [state.api]);
+  }, [api]);
 
-  const content = state.map ? (
-    <Fragment>
-      <CenterMarker />
-      <GeoMarkerList />
-      <MapRoute />
-    </Fragment>
-  ) : null;
+  const content =
+    map && !loading ? (
+      <Fragment>
+        <CenterMarker />
+        <GeoMarkerList />
+        <MapRoute />
+      </Fragment>
+    ) : null;
   return (
-    <div id={containerId} className="map-container">
+    <div id={CONTAINER_ID} className="map-container">
       {content}
     </div>
   );

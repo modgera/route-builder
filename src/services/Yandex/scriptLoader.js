@@ -1,11 +1,14 @@
-import { yandexMapsParams, baseUrl } from './config';
+import { mapsParams, baseUrl } from './config';
 import YandexMaps from './YandexMaps';
 
 const getYandexUrl = () => {
-  const stringParams = Object.keys(yandexMapsParams)
-    .map(key => `${key}=${yandexMapsParams[key]}`)
-    .join('&');
-  return baseUrl + stringParams;
+  const params = Object.keys(mapsParams);
+  const checkApiKey = params.find(p => p === 'apikey');
+  if (checkApiKey) {
+    const stringParams = params.map(key => `${key}=${mapsParams[key]}`).join('&');
+    return baseUrl + stringParams;
+  }
+  throw new Error('api key fro Yandex Maps is not found');
 };
 
 const handleMapReady = callback => {
@@ -17,7 +20,7 @@ const handleOnLoadMap = callback => {
   window.ymaps.ready(() => handleMapReady(callback));
 };
 
-const loadYandexScript = (scriptID, callback) => {
+const loadYandexScript = (scriptID, callback, errorHandler) => {
   const existingScript = document.getElementById(scriptID);
   if (!existingScript) {
     const script = document.createElement('script');
@@ -26,6 +29,9 @@ const loadYandexScript = (scriptID, callback) => {
     if (callback) {
       script.onload = () => handleOnLoadMap(callback);
     }
+    script.onerror = () => {
+      errorHandler('При попытке загрузить Yandex Maps API произошла ошибка');
+    };
     document.head.appendChild(script);
   } else {
     handleOnLoadMap(callback);

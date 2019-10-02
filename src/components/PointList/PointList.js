@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import SortablContainer from '../SortablContainer';
+import SortableListContainer from '../SortableContainer';
 
 import './PointList.css';
 
@@ -16,7 +16,7 @@ const PointList = () => {
     dispatch({ type: actions.CHANGE_POINT_ORDER, info: { oldIndex, newIndex } });
   };
 
-  return <SortablContainer items={points} onSortEnd={onSortEnd} distance={1} />;
+  return <SortableListContainer items={points} onSortEnd={onSortEnd} distance={1} />;
 };
 
 export default PointList;

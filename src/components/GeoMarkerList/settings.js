@@ -7,60 +7,48 @@ const getIconColor = (index, lastIndex) => {
   }
   return REGULAR_POINT_COLOR;
 };
-const getProperties = (apiName, point, info) => {
-  const { id, name, address } = point;
-  const { index } = info;
-  switch (apiName) {
-    case 'Yandex':
-      return { balloonContentHeader: name, balloonContent: address, iconContent: index, id };
-    case 'Google':
-      return { id };
-    default:
-      return {};
-  }
+
+const getIcon = color => {
+  return {
+    path: 'CIRCLE',
+    fillColor: color,
+    fillOpacity: 1,
+    strokeWeight: 0,
+    scale: 10,
+  };
 };
 
-const getChangingProperties = (apiName, info) => {
-  const { index } = info;
-  switch (apiName) {
-    case 'Yandex':
-      return { iconContent: index };
-    case 'Google':
-      return {};
-    default:
-      return {};
-  }
-};
-
-const getOptions = (apiName, info) => {
+const getOptions = (apiName, point, info) => {
   const { index, lastIndex } = info;
+  const { id, name, address } = point;
   const iconColor = getIconColor(index, lastIndex);
   switch (apiName) {
     case 'Yandex':
       return {
-        draggable: true,
-        preset: 'islands#circleIcon',
-        balloonMinWidth: 100,
-        iconColor,
+        options: {
+          draggable: true,
+          preset: 'islands#circleIcon',
+          balloonMinWidth: 100,
+          iconColor,
+        },
+        properties: { balloonContentHeader: name, balloonContent: address, iconContent: index, id },
       };
     case 'Google':
-      return {};
+      return {
+        draggable: true,
+        label: {
+          text: String(index),
+          color: '#fff',
+          fontSize: '12px',
+        },
+        balloon: {
+          content: address,
+        },
+        icon: getIcon(iconColor),
+      };
     default:
       return {};
   }
 };
 
-const getChangingOptions = (apiName, info) => {
-  const { index, lastIndex } = info;
-  const iconColor = getIconColor(index, lastIndex);
-  switch (apiName) {
-    case 'Yandex':
-      return { iconColor };
-    case 'Google':
-      return {};
-    default:
-      return {};
-  }
-};
-
-export { getProperties, getOptions, getChangingOptions, getChangingProperties };
+export default getOptions;

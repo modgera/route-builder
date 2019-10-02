@@ -1,10 +1,22 @@
 import React, { useState, useContext } from 'react';
-import './MarkerInput.css';
+import { v1 as uuid } from 'uuid';
+import './PointInput.css';
 
 import { GlobalContext } from '../../store/provider';
 import actions from '../../store/actions';
 
-const MarkerInput = () => {
+const getPointInfo = async (api, map, pointName) => {
+  const coordinates = api.Map.getMapCenter(map);
+  const address = await api.Utils.getAddress(coordinates);
+  return {
+    address,
+    id: uuid(),
+    name: pointName,
+    coordinates,
+  };
+};
+
+const PointInput = () => {
   const { state, dispatch } = useContext(GlobalContext);
   const [pointName, setPointName] = useState('');
   const { map, api } = state;
@@ -13,14 +25,11 @@ const MarkerInput = () => {
     setPointName(e.target.value);
   };
 
-  const addNewMarkerCallback = info => {
-    dispatch({ type: actions.ADD_POINT, info });
-    setPointName('');
-  };
-
-  const addNewMarker = e => {
+  const addNewPoint = async e => {
     if (e.keyCode === 13 && pointName.length > 0) {
-      api.Utils.getPointInfo(pointName, map, addNewMarkerCallback);
+      const info = await getPointInfo(api, map, pointName);
+      dispatch({ type: actions.ADD_POINT, info });
+      setPointName('');
     }
   };
 
@@ -31,10 +40,10 @@ const MarkerInput = () => {
         className="point-input"
         value={pointName}
         onChange={onPointNameChange}
-        onKeyUp={addNewMarker}
+        onKeyUp={addNewPoint}
       />
     </div>
   );
 };
 
-export default MarkerInput;
+export default PointInput;

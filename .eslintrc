@@ -11,6 +11,7 @@
     "prettier/prettier": ["error"],
     "import/no-extraneous-dependencies": 0,
     "react/jsx-filename-extension": 0,
-    "no-shadow": 0
+    "no-shadow": 0,
+    "no-console": ["error", { "allow": ["warn", "error"] }]
   }
 }

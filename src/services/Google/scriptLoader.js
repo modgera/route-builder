@@ -1,10 +1,14 @@
 import GoogleMaps from './GoogleMaps';
+import { mapsParams, baseUrl } from './config';
 
 const getGoogleUrl = () => {
-  // const stringParams = Object.keys(yandexMapsParams)
-  //   .map(key => `${key}=${yandexMapsParams[key]}`)
-  //   .join("&");
-  return 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBe7feu53P7g4HiJyLXEXpM0Td7UPYOgxI';
+  const params = Object.keys(mapsParams);
+  const checkApiKey = params.find(p => p === 'key');
+  if (checkApiKey) {
+    const stringParams = params.map(key => `${key}=${mapsParams[key]}`).join('&');
+    return baseUrl + stringParams;
+  }
+  throw new Error('api key fro Google Maps is not found');
 };
 
 const handleOnLoadMap = callback => {
@@ -12,7 +16,7 @@ const handleOnLoadMap = callback => {
   callback(MapService);
 };
 
-const loadGoogleScript = (scriptID, callback) => {
+const loadGoogleScript = (scriptID, callback, errorHandler) => {
   const existingScript = document.getElementById(scriptID);
   if (!existingScript) {
     const script = document.createElement('script');
@@ -21,6 +25,9 @@ const loadGoogleScript = (scriptID, callback) => {
     if (callback) {
       script.onload = () => handleOnLoadMap(callback);
     }
+    script.onerror = () => {
+      errorHandler('При попытке загрузить Google Maps API произошла ошибка');
+    };
     document.head.appendChild(script);
   } else {
     handleOnLoadMap(callback);

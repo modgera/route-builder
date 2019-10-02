@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { SortableContainer } from 'react-sortable-hoc';
 import PointItem from '../PointItem';
 
-const SortablListContainer = ({ items }) => {
+const SortableListContainer = ({ items }) => {
   return (
     <ul>
       {items.map((value, index) => (
@@ -13,8 +13,8 @@ const SortablListContainer = ({ items }) => {
   );
 };
 
-SortablListContainer.propTypes = {
+SortableListContainer.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-export default SortableContainer(SortablListContainer);
+export default SortableContainer(SortableListContainer);

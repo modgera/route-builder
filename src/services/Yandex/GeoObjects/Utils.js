@@ -1,6 +1,7 @@
-import { v1 as uuid } from 'uuid';
 import GeoObject from './GeoObject';
 import { defaultMapCenter } from '../config';
+
+const ADDRESS_ERROR_MES = 'Адрес определить не удалось';
 
 const getAddressPart = (partName, components) => {
   const [part] = components.filter(component => component.kind === partName);
@@ -10,7 +11,7 @@ const getAddressPart = (partName, components) => {
   return '';
 };
 
-const getAddress = geoObject => {
+const getAddressText = geoObject => {
   if (geoObject) {
     const addressInfo = geoObject.get(0);
     const addressComponents = addressInfo.properties.get('metaDataProperty.GeocoderMetaData.Address.Components');
@@ -23,7 +24,7 @@ const getAddress = geoObject => {
     }
     return addressInfo.getAddressLine();
   }
-  return 'Не удалось определить адрес';
+  return ADDRESS_ERROR_MES;
 };
 
 export default class Utils extends GeoObject {
@@ -37,22 +38,13 @@ export default class Utils extends GeoObject {
     }
   };
 
-  getPointInfo = (pointName, map, callback) => {
-    const coordinates = map.getCenter();
-    this.ymaps
-      .geocode(coordinates)
-      .then(res => {
-        const address = getAddress(res.geoObjects);
-        const info = {
-          address,
-          id: uuid(),
-          name: pointName,
-          coordinates,
-        };
-        callback(info);
-      })
-      .catch(rej => {
-        console.error(rej);
-      });
+  getAddress = async coordinates => {
+    try {
+      const addressInfo = await this.ymaps.geocode(coordinates);
+      return getAddressText(addressInfo.geoObjects);
+    } catch (error) {
+      console.error(error);
+      return ADDRESS_ERROR_MES;
+    }
   };
 }

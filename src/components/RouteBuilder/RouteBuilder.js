@@ -2,7 +2,7 @@ import React, { Fragment, useContext } from 'react';
 import ApiSwitcher from '../ApiSwitcher';
 import Loader from '../Loader';
 import Map from '../Map';
-import MarkerInput from '../MarkerInput';
+import PointInput from '../PointInput';
 import PointList from '../PointList';
 import CleanPoints from '../CleanPoints';
 
@@ -19,7 +19,7 @@ const RouteBuilder = () => {
       <div className={containerClass}>
         <ApiSwitcher />
         <CleanPoints />
-        <MarkerInput />
+        <PointInput />
         <Map />
         <PointList />
       </div>

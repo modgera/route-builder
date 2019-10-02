@@ -4,14 +4,19 @@ import actions from '../../store/actions';
 
 const ApiSwitcher = () => {
   const { state, dispatch } = useContext(GlobalContext);
-  const setNewApi = apiName => {
-    if (state.apiName !== apiName) {
+
+  const { apiName, api, map } = state;
+
+  const setNewApi = newApiName => {
+    if (apiName !== newApiName) {
+      api.Map.destroy(map);
       dispatch({
         type: actions.CHANGE_API,
-        info: { apiName, loading: true },
+        info: { apiName: newApiName, loading: true },
       });
     }
   };
+
   return (
     <div>
       <button type="button" onClick={() => setNewApi('Yandex')}>

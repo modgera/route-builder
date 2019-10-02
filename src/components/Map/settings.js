@@ -6,13 +6,20 @@ const getOptions = apiName => {
           strokeColor: '#000',
           strokeWidth: 4,
           strokeOpacity: 0.5,
+          checkZoomRange: true,
+        },
+        mapState: {
+          zoom: 11,
+          controls: [],
         },
       };
     case 'Google':
-      return { geodesic: true, strokeColor: '#FF0000', strokeOpacity: 1.0, strokeWeight: 2 };
+      return { zoom: 11, disableDefaultUI: true };
     default:
       return {};
   }
 };
 
-export default getOptions;
+const CONTAINER_ID = 'map-container';
+
+export { getOptions, CONTAINER_ID };

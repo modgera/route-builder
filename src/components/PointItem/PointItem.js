@@ -7,14 +7,14 @@ import DeletePointButton from '../DeletePointButton';
 
 const PointItem = ({ sortIndex, value }) => {
   const {
-    state: { map },
+    state: { map, api },
     dispatch,
   } = useContext(GlobalContext);
 
   const { id, name, coordinates } = value;
 
   const moveToPoint = () => {
-    map.panTo(coordinates);
+    api.Map.panTo(map, coordinates);
   };
 
   const onKeyUpHandler = e => {
@@ -43,7 +43,7 @@ PointItem.propTypes = {
   value: PropTypes.shape({
     id: PropTypes.string,
     name: PropTypes.string,
-    coordinates: PropTypes.arrayOf(PropTypes.number),
+    coordinates: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.number), PropTypes.object]),
   }).isRequired,
 };
 

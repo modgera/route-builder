@@ -2,12 +2,15 @@ import React from 'react';
 
 import { Store } from './store/provider';
 import RouteBuilder from './components/RouteBuilder';
+import ErrorBoundary from './components/ErrorBoundary';
 
 const App = () => {
   return (
-    <Store>
-      <RouteBuilder />
-    </Store>
+    <ErrorBoundary>
+      <Store>
+        <RouteBuilder />
+      </Store>
+    </ErrorBoundary>
   );
 };
 
