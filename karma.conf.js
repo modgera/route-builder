@@ -6,7 +6,6 @@ module.exports = function(config) {
     basePath: '',
     frameworks: ['browserify', 'mocha'],
     files: ['src/__tests__/**/*.html', 'src/__tests__/**/*.js'],
-    exclude: [],
     preprocessors: {
       'src/__tests__/**/*.html': ['html2js'],
       'src/__tests__/**/*.js': ['browserify'],
@@ -27,6 +26,7 @@ module.exports = function(config) {
             output: 'bundle.css',
           },
         ],
+        'imgurify',
       ],
     },
     coverageReporter: {

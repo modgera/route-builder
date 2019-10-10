@@ -11,9 +11,9 @@ const getAddressPart = (partName, components) => {
   return '';
 };
 
-const getAddressText = geoObject => {
-  if (geoObject) {
-    const addressInfo = geoObject.get(0);
+const getAddressText = geoObjects => {
+  try {
+    const addressInfo = geoObjects.get(0);
     const addressComponents = addressInfo.properties.get('metaDataProperty.GeocoderMetaData.Address.Components');
     if (addressComponents) {
       const streetName = getAddressPart('street', addressComponents);
@@ -23,8 +23,9 @@ const getAddressText = geoObject => {
       }
     }
     return addressInfo.getAddressLine();
+  } catch {
+    return ADDRESS_ERROR_MES;
   }
-  return ADDRESS_ERROR_MES;
 };
 
 export default class Utils extends GeoObject {

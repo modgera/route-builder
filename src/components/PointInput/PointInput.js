@@ -34,7 +34,7 @@ const PointInput = () => {
   };
 
   return (
-    <div>
+    <div className="point-input-container">
       <input
         placeholder="Новая точка маршрута"
         className="point-input"

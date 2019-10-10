@@ -23,7 +23,11 @@ const Map = () => {
   useEffect(() => {
     if (api && !map) {
       const options = getOptions(apiName);
-      api.Map.createMap(CONTAINER_ID, setMapToState, options);
+      const useMap = async () => {
+        const newMap = await api.Map.createMap(CONTAINER_ID, options);
+        setMapToState(newMap);
+      };
+      useMap();
     }
   }, [api]);
 

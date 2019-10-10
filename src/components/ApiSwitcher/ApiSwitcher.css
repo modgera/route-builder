@@ -1,0 +1,32 @@
+.api-switcher {
+  display: flex;
+  justify-content: center;
+  margin: 30px;
+}
+
+.google-api-btn,
+.yandex-api-btn {
+  border: 0;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.google-api-btn {
+  background-color: #65818e;
+  color: #fff;
+}
+
+.google-api-btn:hover {
+  background-color: #5d6f78;
+}
+
+.yandex-api-btn {
+  background-color: #dd6464;
+  margin-right: 15px;
+  color: #fff;
+}
+
+.yandex-api-btn:hover {
+  background-color: #bc5d5d;
+}

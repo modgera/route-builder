@@ -4,7 +4,7 @@ import { defaultMapCenter } from '../config';
 const ADDRESS_ERROR_MES = 'Адрес определить не удалось';
 
 const getCurrentPosition = () => {
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     navigator.geolocation.getCurrentPosition(
       position => {
         resolve({
@@ -13,7 +13,7 @@ const getCurrentPosition = () => {
         });
       },
       () => {
-        reject(defaultMapCenter);
+        resolve(defaultMapCenter);
       }
     );
   });
@@ -45,9 +45,24 @@ export default class Utils extends GeoObject {
     return latLng;
   };
 
+  validateCoordinates = coordinates => {
+    if (coordinates instanceof this.googleMap.LatLng) {
+      return true;
+    }
+    const checkType = typeof coordinates === 'object';
+    const keys = Object.keys(coordinates);
+    const checkKeyLen = keys.length === 2;
+    const checkKeyExistence = 'lat' in coordinates && 'lng' in coordinates;
+    const checkValues = typeof coordinates.lat === 'number' && typeof coordinates.lng === 'number';
+    if (checkType && checkKeyLen && checkKeyExistence && checkValues) {
+      return true;
+    }
+    return false;
+  };
+
   getUserLocation = async () => {
     if (navigator.geolocation) {
-      const userPosition = await getCurrentPosition();
+      const userPosition = getCurrentPosition();
       return userPosition;
     }
     return defaultMapCenter;
@@ -55,17 +70,20 @@ export default class Utils extends GeoObject {
 
   getAddress = async coordinates => {
     const geocoder = new this.googleMap.Geocoder();
-    const promise = new Promise((resolve, reject) => {
-      geocoder.geocode({ location: coordinates }, (results, status) => {
-        if (status === 'OK') {
-          const addressInfo = results[0];
-          const address = getAddressText(addressInfo);
-          resolve(address);
-        }
-        reject(ADDRESS_ERROR_MES);
+    const validCoordinates = this.validateCoordinates(coordinates);
+    if (validCoordinates) {
+      const address = new Promise((resolve, reject) => {
+        geocoder.geocode({ location: coordinates }, (results, status) => {
+          if (status === 'OK') {
+            const addressInfo = results[0];
+            const address = getAddressText(addressInfo);
+            resolve(address);
+          }
+          reject(ADDRESS_ERROR_MES);
+        });
       });
-    });
-    const address = await promise;
-    return address;
+      return address;
+    }
+    return ADDRESS_ERROR_MES;
   };
 }

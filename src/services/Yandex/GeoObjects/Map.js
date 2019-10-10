@@ -7,15 +7,13 @@ const addOnClickBalloonClosing = map => {
 };
 
 export default class Map extends GeoObject {
-  createMap = async (containerName, callback, params) => {
+  createMap = async (containerName, params) => {
     const { mapState, options } = params;
     const center = await this.getNewMapCenter(mapState.center);
     const defaultState = Object.assign(mapState, { center });
-    const newMap = new this.ymaps.Map(containerName, defaultState, options);
+    const newMap = await new this.ymaps.Map(containerName, defaultState, options);
     addOnClickBalloonClosing(newMap);
-    if (callback) {
-      callback(newMap);
-    }
+    return newMap;
   };
 
   getNewMapCenter = mapCenter => {

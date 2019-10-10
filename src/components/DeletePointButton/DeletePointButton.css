@@ -1,0 +1,7 @@
+.delete-point-btn {
+  padding: 0;
+  border: 0;
+  background: url("./close-cross.svg") no-repeat scroll center center / 100% auto rgba(0, 0, 0, 0);
+  width: 15px;
+  height: 15px;
+}

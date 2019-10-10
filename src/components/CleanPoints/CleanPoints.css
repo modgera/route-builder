@@ -1,0 +1,13 @@
+.clear-points {
+  padding: 0;
+  border: 0;
+  font-family: inherit;
+  font-size: 1em;
+  background-color: inherit;
+  cursor: pointer;
+  color: #1c78a4;
+}
+
+.clear-points:hover {
+  color: #35b3c7;
+}

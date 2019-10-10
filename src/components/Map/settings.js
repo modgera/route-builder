@@ -9,12 +9,12 @@ const getOptions = apiName => {
           checkZoomRange: true,
         },
         mapState: {
-          zoom: 11,
+          zoom: 12,
           controls: [],
         },
       };
     case 'Google':
-      return { zoom: 11, disableDefaultUI: true };
+      return { zoom: 12, disableDefaultUI: true };
     default:
       return {};
   }

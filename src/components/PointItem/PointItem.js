@@ -4,6 +4,7 @@ import { SortableElement } from 'react-sortable-hoc';
 import { GlobalContext } from '../../store/provider';
 import actions from '../../store/actions';
 import DeletePointButton from '../DeletePointButton';
+import './PointItem.css';
 
 const PointItem = ({ sortIndex, value }) => {
   const {
@@ -29,7 +30,7 @@ const PointItem = ({ sortIndex, value }) => {
 
   const markerTitle = `${sortIndex + 1} - ${name}`;
   return (
-    <li>
+    <li className="point-item">
       <div role="button" tabIndex="0" data-index={sortIndex} onClick={moveToPoint} onKeyUp={onKeyUpHandler}>
         {markerTitle}
       </div>

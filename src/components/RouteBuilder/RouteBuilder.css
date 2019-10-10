@@ -1,3 +1,10 @@
-.route-builder_disable {
+.route-builder_disabled {
   display: none
+}
+
+.route-map-container {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 30px;
+  border-top: 1px solid #e0e0e0;
 }

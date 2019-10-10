@@ -1,22 +1,12 @@
 import GeoObject from './GeoObject';
 
 export default class Map extends GeoObject {
-  createMap = (containerName, callback) => {
-    const newMap = new this.googleMap.Map(document.getElementById(containerName), {
-      center: { lat: -34.397, lng: 150.644 },
-      zoom: 8,
-    });
-    callback(newMap);
-  };
-
-  createMap = async (containerName, callback, options = {}) => {
+  createMap = async (containerName, options = {}) => {
     const center = await this.getNewMapCenter(options.center);
     const defaultOptions = Object.assign(options, { center });
     const mapContainer = document.getElementById(containerName);
-    const newMap = new this.googleMap.Map(mapContainer, defaultOptions);
-    if (callback) {
-      callback(newMap);
-    }
+    const newMap = await new this.googleMap.Map(mapContainer, defaultOptions);
+    return newMap;
   };
 
   getNewMapCenter = mapCenter => {

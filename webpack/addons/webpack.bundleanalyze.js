@@ -5,7 +5,7 @@ module.exports = {
     new WebpackBundleAnalyzer({
       analyzerMode: 'static',
       reportFilename: './report.html',
-      openAnalyzer: false
-    })
-  ]
+      openAnalyzer: false,
+    }),
+  ],
 };

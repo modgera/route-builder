@@ -1,0 +1,60 @@
+.point-list__container {
+  background: #ffffff;
+  padding: 20px;
+  min-height: 600px;
+  box-sizing: border-box;
+}
+
+.point-list {
+  padding: 0 10px 0 0;
+  margin: 20px 0 0 0;
+  max-height: 525px;
+  overflow: auto;
+}
+
+@media screen and (min-width: 1280px) {
+  .point-list__container {
+    width: 20%;
+  }
+}
+
+@media screen and (min-width: 5001px) and (max-width: 1279px) {
+  .point-list__container {
+    width: 35%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .point-list__container {
+    width: 50%;
+  }
+
+  .point-list__header {
+    flex-direction: column;
+  }
+
+  .point-list {
+    max-height: 295px;
+  }
+}
+
+.point-list__header {
+  display: flex;
+  justify-content: space-between;
+  text-transform: uppercase;
+}
+
+.point-list::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: #e8e8e8;
+}
+
+.point-list::-webkit-scrollbar {
+  width: 10px;
+  background-color: #F5F5F5;
+}
+
+.point-list::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #acacac;
+}

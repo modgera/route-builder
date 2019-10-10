@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { GlobalContext } from '../../store/provider';
 import actions from '../../store/actions';
+import './ApiSwitcher.css';
 
 const ApiSwitcher = () => {
   const { state, dispatch } = useContext(GlobalContext);
@@ -18,12 +19,12 @@ const ApiSwitcher = () => {
   };
 
   return (
-    <div>
-      <button type="button" onClick={() => setNewApi('Yandex')}>
-        Yandex
+    <div className="api-switcher">
+      <button type="button" onClick={() => setNewApi('Yandex')} className="yandex-api-btn">
+        Яндекс Карты
       </button>
-      <button type="button" onClick={() => setNewApi('Google')}>
-        Google
+      <button type="button" onClick={() => setNewApi('Google')} className="google-api-btn">
+        Google Maps
       </button>
     </div>
   );

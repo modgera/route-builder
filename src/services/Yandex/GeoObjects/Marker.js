@@ -28,15 +28,15 @@ const changeMarkerParams = (marker, params, paramsName) => {
 
 export default class Marker extends GeoObject {
   createMarker = (map, params = {}, coordinates = []) => {
-    const { options, properties } = params;
+    const { options = {}, properties = {} } = params;
     const markerCoordinates = getMarkerCoordinate(coordinates, map);
     const marker = new this.ymaps.Placemark(markerCoordinates, properties, options);
     map.geoObjects.add(marker);
     return marker;
   };
 
-  addCenterMarkerToMap = (map, options = {}) => {
-    const centerMarker = this.createMarker(map, options);
+  addCenterMarkerToMap = (map, params = {}) => {
+    const centerMarker = this.createMarker(map, params);
     map.events.add('actiontickcomplete', () => onChangeMapCenterHandler(map, centerMarker));
     map.geoObjects.add(centerMarker);
   };
