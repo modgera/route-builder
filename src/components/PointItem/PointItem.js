@@ -24,14 +24,15 @@ const PointItem = ({ sortIndex, value }) => {
     }
   };
 
-  const deletePointHandler = () => {
+  const deletePointHandler = e => {
     dispatch({ type: actions.DELETE_POINT, info: { id } });
+    e.stopPropagation();
   };
 
   const markerTitle = `${sortIndex + 1} - ${name}`;
   return (
-    <li className="point-item">
-      <div role="button" tabIndex="0" data-index={sortIndex} onClick={moveToPoint} onKeyUp={onKeyUpHandler}>
+    <li className="point-item" onClick={moveToPoint} onKeyUp={onKeyUpHandler} tabIndex="0">
+      <div data-index={sortIndex} className="point-item__title">
         {markerTitle}
       </div>
       <DeletePointButton deletePointHandler={deletePointHandler} />

@@ -5,9 +5,10 @@
   font-size: 1em;
   background-color: inherit;
   cursor: pointer;
-  color: #1c78a4;
+  color: #65818e;
 }
 
 .clear-points:hover {
-  color: #35b3c7;
+  color: #5d6f78;
+  text-decoration: underline;
 }

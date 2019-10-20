@@ -12,6 +12,8 @@
     "import/no-extraneous-dependencies": 0,
     "react/jsx-filename-extension": 0,
     "no-shadow": 0,
-    "no-console": ["error", { "allow": ["warn", "error"] }]
+    "no-console": ["error", { "allow": ["warn", "error"] }],
+    "jsx-a11y/no-noninteractive-element-interactions": 0,
+    "jsx-a11y/no-noninteractive-tabindex": 0
   }
 }

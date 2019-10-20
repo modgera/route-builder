@@ -1,0 +1,24 @@
+.control-panel__container {
+  background: #ffffff;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0px;
+}
+
+.control-panel__container>div {
+  margin-bottom: 20px;
+  padding-right: 10px;
+}
+
+.control-panel__container>div:last-child {
+  margin-bottom: 0px;
+}
+
+.control-panel__header {
+  display: flex;
+  justify-content: space-between;
+  text-transform: uppercase;
+}

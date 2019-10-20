@@ -1,0 +1,11 @@
+.mode-switcher {
+  border: none;
+  padding: 10px;
+  background-color: #65818e;
+  color: #fff;
+  cursor: pointer;
+}
+
+.mode-switcher__title {
+  margin-left: 10px;
+}

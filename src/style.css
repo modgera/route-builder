@@ -1,0 +1,128 @@
+html,
+body {
+  height: 100%;
+  min-height: 500px;
+  overflow-y: auto;
+}
+
+body {
+  font-size: 16px;
+  background-color: #fbfbfb;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  min-height: 60px;
+  position: relative;
+  z-index: 999;
+  font-size: 30px;
+  text-align: center;
+  color: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  flex: 0 0 auto;
+}
+
+.logo {
+  width: 24px;
+  margin-right: 10px;
+}
+
+.footer {
+  min-height: 80px;
+  text-align: center;
+  background-color: #4d5b61;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.github-logo {
+  width: 24px;
+  margin-top: 10px;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #b8b8b8;
+}
+
+a:hover {
+  color: #c4c8ca;
+}
+
+.control-panel__content {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+@media screen and (min-width: 1280px) {
+  .control-panel__container {
+    width: 20%;
+  }
+
+  .map-container {
+    width: 80%;
+  }
+}
+
+
+@media screen and (min-width: 801px) and (max-width: 1279px) {
+  .map-container {
+    width: 65%;
+  }
+
+  .control-panel__container {
+    width: 35%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .map-container {
+    width: 100%;
+    flex: 1;
+    min-height: auto;
+  }
+
+  .map-container_hidden,
+  .control-panel__content_hidden {
+    display: none;
+  }
+
+  .control-panel__container {
+    width: 100%;
+    flex: 1;
+  }
+
+  .control-panel__container_hidden {
+    flex: none;
+  }
+
+  .route-builder {
+    flex-direction: column;
+  }
+}
+
+/* .control-panel__container {
+    width: 50%;
+  }
+
+  .control-panel__header {
+    flex-direction: column;
+  }
+
+  .point-list {
+    max-height: 295px;
+  } */

@@ -38,4 +38,8 @@ export default class Map extends GeoObject {
   moveToFirstPoint = (map, coordinates) => {
     map.setCenter(coordinates);
   };
+
+  resize = map => {
+    map.container.fitToViewport();
+  };
 }

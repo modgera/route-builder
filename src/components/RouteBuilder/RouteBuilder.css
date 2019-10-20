@@ -2,9 +2,19 @@
   display: none
 }
 
-.route-map-container {
+.route-builder {
   display: flex;
-  align-items: flex-start;
-  margin-top: 30px;
-  border-top: 1px solid #e0e0e0;
+  animation: slide-up 1s ease;
+  flex: 1;
+  min-height: 0;
+}
+
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }

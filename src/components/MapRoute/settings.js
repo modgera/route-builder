@@ -4,12 +4,12 @@ const getOptions = apiName => {
       return {
         options: {
           strokeColor: '#000',
-          strokeWidth: 4,
-          strokeOpacity: 0.5,
+          strokeWidth: 3,
+          strokeOpacity: 0.3,
         },
       };
     case 'Google':
-      return { geodesic: true, strokeColor: '#FF0000', strokeOpacity: 1.0, strokeWeight: 2 };
+      return { geodesic: true, strokeColor: '#000', strokeOpacity: 0.3, strokeWeight: 2 };
     default:
       return {};
   }

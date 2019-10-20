@@ -1,10 +1,9 @@
 .api-switcher {
   display: flex;
-  justify-content: center;
-  margin: 30px;
+  justify-content: space-evenly;
 }
 
-.google-api-btn,
+/* .google-api-btn,
 .yandex-api-btn {
   border: 0;
   padding: 10px;
@@ -29,4 +28,4 @@
 
 .yandex-api-btn:hover {
   background-color: #bc5d5d;
-}
+} */

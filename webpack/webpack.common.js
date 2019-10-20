@@ -2,6 +2,7 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
@@ -42,13 +43,14 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      title: 'Advanced React with Webpack Setup',
       template: './src/index.html',
+      favicon: './public/img/favicon.png',
     }),
     new MiniCssExtractPlugin({
       filename: 'public/styles/[name].bundle.css',
       chunkFilename: '[id].css',
     }),
+    new CopyWebpackPlugin([{ from: 'public', to: 'public' }]),
   ],
   output: {
     path: path.resolve(__dirname, '../', 'dist'),

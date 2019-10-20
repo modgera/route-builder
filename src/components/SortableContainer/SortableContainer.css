@@ -1,0 +1,17 @@
+.sortableitems-enter {
+  opacity: 0.01;
+}
+
+.sortableitems-enter.sortableitems-enter-active {
+  opacity: 1;
+  transition: opacity 200ms ease-in;
+}
+
+.sortableitems-leave {
+  opacity: 1;
+}
+
+.sortableitems-leave.sortableitems-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}

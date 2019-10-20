@@ -1,5 +1,5 @@
-const REGULAR_POINT_COLOR = '#46dff0';
-const END_POINT_COLOR = '#790707';
+const REGULAR_POINT_COLOR = '#b0bec5';
+const END_POINT_COLOR = '#65818e';
 
 const getIconColor = (index, lastIndex) => {
   if (index === lastIndex) {

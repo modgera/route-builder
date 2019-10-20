@@ -1,7 +1,14 @@
 .delete-point-btn {
   padding: 0;
   border: 0;
-  background: url("./close-cross.svg") no-repeat scroll center center / 100% auto rgba(0, 0, 0, 0);
+  background-color: inherit;
   width: 15px;
   height: 15px;
+  font-size: 100%;
+  color: inherit;
+}
+
+.delete-point-btn:hover {
+  cursor: pointer;
+  color: #dddddd;
 }

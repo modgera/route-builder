@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, Fragment } from 'react';
-
+import PropTypes from 'prop-types';
 import { GlobalContext } from '../../store/provider';
 import actions from '../../store/actions';
 import CenterMarker from '../CenterMarker';
@@ -9,7 +9,7 @@ import { getOptions, CONTAINER_ID } from './settings';
 
 import './Map.css';
 
-const Map = () => {
+const Map = ({ mapClass }) => {
   const { state, dispatch } = useContext(GlobalContext);
   const { api, apiName, map, loading } = state;
 
@@ -39,11 +39,21 @@ const Map = () => {
         <MapRoute />
       </Fragment>
     ) : null;
+
+  const mapMod = mapClass ? `map-container_${mapClass}` : '';
   return (
-    <div id={CONTAINER_ID} className="map-container">
+    <div id={CONTAINER_ID} className={`map-container ${mapMod}`}>
       {content}
     </div>
   );
+};
+
+Map.propTypes = {
+  mapClass: PropTypes.string,
+};
+
+Map.defaultProps = {
+  mapClass: '',
 };
 
 export default Map;

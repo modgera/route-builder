@@ -8,8 +8,9 @@
   font-size: 100%;
   border: 1px solid #bdbdbd;
   border-radius: 5px;
+  width: 100%;
 }
-
+/* 
 @media screen and (min-width: 1280px) {
   .point-input {
     width: 600px;
@@ -26,4 +27,4 @@
   .point-input {
     width: 100%;
   }
-}
+} */

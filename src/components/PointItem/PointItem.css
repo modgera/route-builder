@@ -3,35 +3,26 @@
   display: flex;
   justify-content: space-between;
   padding: 10px;
-  cursor: pointer;
+  cursor: move;
   border: solid 1px #d8d8d8;
   border-radius: 5px;
   margin-top: 10px;
-  margin-right: 10px;
-  background-color: #ededed;
+  background-color: #f8f8f8;
+  /* animation: slide-up 0.4s ease; */
+  /*transition: all 0.15s ease-out; */
 }
 
 .point-item:first-child {
   margin-top: 0px;
 }
 
-/*.point-item:last-child {
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-} */
-
-/* .point-item:nth-child(even) {
-  background-color: #8bfbb2;
+.point-item__title {
+  width: 95%;
+  margin-right: 5px;
 }
-
-.point-item:nth-child(odd) {
-  background-color: #effff4;
-} */
 
 .point-item:hover {
-  background-color: #8bfbb2;
+  border-color: #65818e;
+  /* background-color: #65818e;
+  color: #fff; */
 }
-
-/* .point-item:last-child {
-  padding-bottom: 0;
-} */

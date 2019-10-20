@@ -40,4 +40,10 @@ export default class Map extends GeoObject {
   moveToFirstPoint = (map, coordinates) => {
     this.panTo(map, coordinates);
   };
+
+  resize = map => {
+    const currCenter = map.getCenter();
+    this.googleMap.event.trigger(map, 'resize');
+    map.setCenter(currCenter);
+  };
 }

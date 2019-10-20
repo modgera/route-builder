@@ -1,12 +1,16 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import SortableListContainer from '../SortableContainer';
-import CleanPoints from '../CleanPoints';
 import './PointList.css';
 
 import { GlobalContext } from '../../store/provider';
 import actions from '../../store/actions';
 
 const PointList = () => {
+  const [isTouch, setIsTouch] = useState(false);
+  window.addEventListener('touchstart', () => {
+    setIsTouch(true);
+  });
+
   const {
     state: { points },
     dispatch,
@@ -15,15 +19,16 @@ const PointList = () => {
   const onSortEnd = ({ oldIndex, newIndex }) => {
     dispatch({ type: actions.CHANGE_POINT_ORDER, info: { oldIndex, newIndex } });
   };
+  const scrollParams = isTouch ? { pressDelay: 250 } : { distance: 1 };
 
   return (
-    <div className="point-list__container">
-      <div className="point-list__header">
-        <span>Точки маршрута:</span>
-        <CleanPoints />
-      </div>
-      <SortableListContainer items={points} onSortEnd={onSortEnd} distance={1} className="point-list" />
-    </div>
+    <SortableListContainer
+      items={points}
+      helperClass="point-dragging"
+      {...scrollParams}
+      onSortEnd={onSortEnd}
+      className="point-list"
+    />
   );
 };
 
