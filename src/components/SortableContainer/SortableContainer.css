@@ -1,17 +1,36 @@
-.sortableitems-enter {
-  opacity: 0.01;
+.my-node-enter {
+  opacity: 0;
 }
 
-.sortableitems-enter.sortableitems-enter-active {
+.my-node-enter-active {
   opacity: 1;
-  transition: opacity 200ms ease-in;
+  transition: opacity 200ms;
 }
 
-.sortableitems-leave {
+.my-node-exit {
   opacity: 1;
 }
 
-.sortableitems-leave.sortableitems-leave-active {
-  opacity: 0.01;
-  transition: opacity 300ms ease-in;
+.my-node-exit-active {
+  opacity: 0;
+  transition: opacity 200ms;
+}
+
+
+.item-enter {
+  opacity: 0;
+}
+
+.item-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.item-exit {
+  opacity: 1;
+}
+
+.item-exit-active {
+  opacity: 0;
+  transition: opacity 500ms ease-in;
 }

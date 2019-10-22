@@ -31,10 +31,8 @@ const PointItem = ({ sortIndex, value }) => {
 
   const markerTitle = `${sortIndex + 1} - ${name}`;
   return (
-    <li className="point-item" onClick={moveToPoint} onKeyUp={onKeyUpHandler} tabIndex="0">
-      <div data-index={sortIndex} className="point-item__title">
-        {markerTitle}
-      </div>
+    <li className="point-item point-item_new" onClick={moveToPoint} onKeyUp={onKeyUpHandler} tabIndex="0">
+      <div className="point-item__title">{markerTitle}</div>
       <DeletePointButton deletePointHandler={deletePointHandler} />
     </li>
   );

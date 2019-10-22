@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import SortableListContainer from '../SortableContainer';
 import './PointList.css';
 
@@ -7,9 +7,14 @@ import actions from '../../store/actions';
 
 const PointList = () => {
   const [isTouch, setIsTouch] = useState(false);
-  window.addEventListener('touchstart', () => {
+  const findTouch = () => {
     setIsTouch(true);
-  });
+    window.removeEventListener('touchstart', findTouch, false);
+  };
+  useEffect(() => {
+    window.addEventListener('touchstart', findTouch, false);
+    return () => window.removeEventListener('touchstart', findTouch, false);
+  }, []);
 
   const {
     state: { points },

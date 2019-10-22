@@ -1,5 +1,26 @@
-import arrayMove from 'array-move';
 import actions from './actions';
+
+const arrayMove = (array, oldIndex, newIndex) => {
+  if (oldIndex === newIndex) {
+    return array;
+  }
+  const movingElement = array[oldIndex];
+  const newArray = array.reduce((arr, elem, index) => {
+    if (index === newIndex) {
+      if (oldIndex > newIndex) {
+        arr.push(movingElement);
+        arr.push(elem);
+      } else {
+        arr.push(elem);
+        arr.push(movingElement);
+      }
+    } else if (index !== oldIndex) {
+      arr.push(elem);
+    }
+    return arr;
+  }, []);
+  return newArray;
+};
 
 const globalReducer = (state, action) => {
   const { info } = action;
@@ -21,7 +42,9 @@ const globalReducer = (state, action) => {
     }
 
     case actions.CHANGE_POINT_ORDER: {
-      const points = arrayMove(state.points, info.oldIndex, info.newIndex);
+      const oldPoints = state.points;
+      const { oldIndex, newIndex } = info;
+      const points = arrayMove(oldPoints, oldIndex, newIndex);
       return {
         ...state,
         points,

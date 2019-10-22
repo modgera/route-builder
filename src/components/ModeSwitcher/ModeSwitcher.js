@@ -7,15 +7,15 @@ import { GlobalContext } from '../../store/provider';
 import './ModeSwitcher.css';
 
 const modeInfo = {
-  1: {
+  map: {
     name: 'Показать список',
     icon: faListOl,
-    nextMode: 2,
+    nextMode: 'list',
   },
-  2: {
+  list: {
     name: 'Показать карту',
     icon: faMapMarked,
-    nextMode: 1,
+    nextMode: 'map',
   },
 };
 
@@ -30,7 +30,7 @@ const ModeSwitcher = ({ currentMode, setCurrentMode }) => {
   };
 
   useEffect(() => {
-    if (currentMode === 1) {
+    if (currentMode === 'map') {
       api.Map.resize(map);
     }
   }, [currentMode]);
@@ -44,7 +44,7 @@ const ModeSwitcher = ({ currentMode, setCurrentMode }) => {
 };
 
 ModeSwitcher.propTypes = {
-  currentMode: PropTypes.number.isRequired,
+  currentMode: PropTypes.string.isRequired,
   setCurrentMode: PropTypes.func.isRequired,
 };
 

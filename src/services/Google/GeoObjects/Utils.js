@@ -12,7 +12,8 @@ const getCurrentPosition = () => {
           lng: position.coords.longitude,
         });
       },
-      () => {
+      error => {
+        console.error(error);
         resolve(defaultMapCenter);
       }
     );

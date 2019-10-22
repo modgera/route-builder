@@ -5,7 +5,6 @@
   overflow-y: auto;
   overflow-x: hidden;
   padding-right: 10px;
-  /* transition: all 0.3s ease-out; */
 }
 
 .point-list::-webkit-scrollbar-track {
@@ -26,6 +25,7 @@
 .point-dragging {
   pointer-events: auto !important;
   transition: none;
+  outline: none;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
