@@ -23,6 +23,7 @@ const ModeSwitcher = ({ currentMode, setCurrentMode }) => {
   const {
     state: { api, map },
   } = useContext(GlobalContext);
+
   const { name, icon, nextMode } = modeInfo[currentMode];
 
   const switchModeHandler = () => {

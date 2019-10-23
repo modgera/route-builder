@@ -31,7 +31,7 @@ const GeoMarkerList = () => {
     return newMarkerInfo;
   };
 
-  useEffect(() => {
+  const changeMapApi = () => {
     if (points.length && map && api) {
       const [startPoint] = points;
       const { coordinates } = startPoint;
@@ -40,7 +40,9 @@ const GeoMarkerList = () => {
     return () => {
       setMarkers([]);
     };
-  }, [apiName]);
+  };
+
+  useEffect(changeMapApi, [apiName]);
 
   useEffect(() => {
     const existingMarkers = markers.filter(currentMarker => {

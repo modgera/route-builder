@@ -10,11 +10,6 @@
   background-color: #f8f8f8;
 }
 
-.point-item_new {
-  /* animation: slide-up 0.4s ease; */
-  /*transition: all 0.15s ease-out; */
-}
-
 .point-item:first-child {
   margin-top: 0px;
 }

@@ -6,7 +6,7 @@ import actions from '../../store/actions';
 import DeletePointButton from '../DeletePointButton';
 import './PointItem.css';
 
-const PointItem = ({ sortIndex, value }) => {
+const PointItem = ({ sortIndex, value, animationClass }) => {
   const {
     state: { map, api },
     dispatch,
@@ -30,8 +30,9 @@ const PointItem = ({ sortIndex, value }) => {
   };
 
   const markerTitle = `${sortIndex + 1} - ${name}`;
+
   return (
-    <li className="point-item point-item_new" onClick={moveToPoint} onKeyUp={onKeyUpHandler} tabIndex="0">
+    <li className={`point-item ${animationClass}`} onClick={moveToPoint} onKeyUp={onKeyUpHandler} tabIndex="0">
       <div className="point-item__title">{markerTitle}</div>
       <DeletePointButton deletePointHandler={deletePointHandler} />
     </li>
@@ -45,6 +46,11 @@ PointItem.propTypes = {
     name: PropTypes.string,
     coordinates: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.number), PropTypes.object]),
   }).isRequired,
+  animationClass: PropTypes.string,
+};
+
+PointItem.defaultProps = {
+  animationClass: '',
 };
 
 export default SortableElement(PointItem);

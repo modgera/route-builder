@@ -20,14 +20,15 @@ const Map = ({ mapClass }) => {
     });
   };
 
+  const useMap = async options => {
+    const newMap = await api.Map.createMap(CONTAINER_ID, options);
+    setMapToState(newMap);
+  };
+
   useEffect(() => {
     if (api && !map) {
       const options = getOptions(apiName);
-      const useMap = async () => {
-        const newMap = await api.Map.createMap(CONTAINER_ID, options);
-        setMapToState(newMap);
-      };
-      useMap();
+      useMap(options);
     }
   }, [api]);
 

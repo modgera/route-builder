@@ -7,23 +7,26 @@ import actions from '../../store/actions';
 
 const PointList = () => {
   const [isTouch, setIsTouch] = useState(false);
-  const findTouch = () => {
-    setIsTouch(true);
-    window.removeEventListener('touchstart', findTouch, false);
-  };
-  useEffect(() => {
-    window.addEventListener('touchstart', findTouch, false);
-    return () => window.removeEventListener('touchstart', findTouch, false);
-  }, []);
 
   const {
     state: { points },
     dispatch,
   } = useContext(GlobalContext);
 
+  const findTouch = () => {
+    setIsTouch(true);
+    window.removeEventListener('touchstart', findTouch, false);
+  };
+
+  useEffect(() => {
+    window.addEventListener('touchstart', findTouch, false);
+    return () => window.removeEventListener('touchstart', findTouch, false);
+  }, []);
+
   const onSortEnd = ({ oldIndex, newIndex }) => {
     dispatch({ type: actions.CHANGE_POINT_ORDER, info: { oldIndex, newIndex } });
   };
+
   const scrollParams = isTouch ? { pressDelay: 250 } : { distance: 1 };
 
   return (
