@@ -18,9 +18,9 @@ const getButtonParams = (apiName, buttonApiName, onClickHandler) => {
 };
 
 const ApiButton = ({ apiName, buttonApiName, setNewApi, children }) => {
-  const { className, onClick, disabled } = getButtonParams(apiName, buttonApiName, setNewApi);
+  const params = getButtonParams(apiName, buttonApiName, setNewApi);
   return (
-    <button type="button" onClick={onClick} className={className} disabled={disabled}>
+    <button type="button" {...params}>
       {children}
     </button>
   );

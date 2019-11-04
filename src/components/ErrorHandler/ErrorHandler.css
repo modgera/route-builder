@@ -1,0 +1,16 @@
+.error-handler__container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 100%;
+  align-content: center;
+  text-align: center;
+}
+
+.error-handler__logo>img {
+  max-width: 150px;
+}
+
+.error-handler__text {
+  color: #a30909;
+}

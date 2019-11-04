@@ -31,7 +31,7 @@ const GeoMarkerList = () => {
     return newMarkerInfo;
   };
 
-  const changeMapApi = () => {
+  useEffect(() => {
     if (points.length && map && api) {
       const [startPoint] = points;
       const { coordinates } = startPoint;
@@ -40,26 +40,25 @@ const GeoMarkerList = () => {
     return () => {
       setMarkers([]);
     };
-  };
-
-  useEffect(changeMapApi, [apiName]);
+  }, [apiName]);
 
   useEffect(() => {
-    const existingMarkers = markers.filter(currentMarker => {
+    const deleteMarkers = currentMarker => {
       const { marker, id } = currentMarker;
       if (!findMarker(points, id)) {
         api.Marker.deleteMarker(marker, map);
         return false;
       }
       return true;
-    });
+    };
+    const existingMarkers = markers.filter(deleteMarkers);
     setMarkers(existingMarkers);
   }, [points]);
 
   useEffect(() => {
     const lastIndex = points.length;
     const newMarkers = [];
-    points.forEach((point, i) => {
+    const updateMarkers = (point, i) => {
       const { id } = point;
       const info = { index: i + 1, lastIndex };
       const options = getOptions(apiName, point, info);
@@ -70,9 +69,10 @@ const GeoMarkerList = () => {
         const newMarker = createMarker(point, options);
         newMarkers.push(newMarker);
       }
-    });
+    };
+    points.forEach(updateMarkers);
     if (newMarkers.length) {
-      setMarkers([...markers, ...newMarkers]);
+      setMarkers(oldMarkers => [...oldMarkers, ...newMarkers]);
     }
   }, [points, map]);
 
