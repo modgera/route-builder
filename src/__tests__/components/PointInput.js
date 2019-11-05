@@ -8,7 +8,7 @@ import PointInput from '../../components/PointInput';
 import { GlobalContext } from '../../store/provider';
 
 describe('PointInput (component)', function() {
-  const placeholderText = 'Новая точка маршрута';
+  const placeholderText = 'New point name';
   const spy = sinon.spy();
   const state = {
     api: {

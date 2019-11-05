@@ -22,7 +22,7 @@ const ApiSwitcher = () => {
   return (
     <div className="api-switcher">
       <ApiButton setNewApi={setNewApi} apiName={apiName} buttonApiName="Yandex">
-        Яндекс Карты
+        Yandex Maps
       </ApiButton>
       <ApiButton setNewApi={setNewApi} apiName={apiName} buttonApiName="Google">
         Google Maps

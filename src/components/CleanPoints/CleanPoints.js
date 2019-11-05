@@ -11,7 +11,7 @@ const CleanPoints = () => {
   };
   return (
     <button type="button" onClick={cleanPoints} className="clear-points">
-      Очистить
+      Clean all
     </button>
   );
 };

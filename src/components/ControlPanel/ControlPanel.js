@@ -15,7 +15,7 @@ const ControlPanel = ({ listClass }) => {
       <PointInput />
       <div className={`control-panel__content ${contentMod}`}>
         <div className="control-panel__header">
-          <span>Точки маршрута:</span>
+          <span>Route points:</span>
           <CleanPoints />
         </div>
         <PointList />

@@ -26,7 +26,7 @@ describe('ApiSwitcher (component)', function() {
         <ApiSwitcher />
       </GlobalContext.Provider>
     );
-    expect(getByText(container, 'Яндекс Карты')).exist;
+    expect(getByText(container, 'Yandex Maps')).exist;
     expect(getByText(container, 'Google Maps')).exist;
   });
 

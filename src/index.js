@@ -6,4 +6,6 @@ import './style.css';
 
 ReactDOM.render(<Router />, document.getElementById('app'));
 
-module.hot.accept();
+if (module.hot) {
+  module.hot.accept();
+}

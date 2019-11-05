@@ -1,5 +1,6 @@
 const Dotenv = require('dotenv-webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
   mode: 'production',
@@ -29,6 +30,11 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'public/styles/[name].bundle.css',
       chunkFilename: '[id].css',
+    }),
+    new CompressionPlugin({
+      filename: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: /\.(js|css)$/,
     }),
   ],
   devServer: {

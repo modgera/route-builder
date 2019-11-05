@@ -9,14 +9,14 @@ import { GlobalContext } from '../../store/provider';
 
 describe('CleanPoints (component)', function() {
   const dispatch = sinon.spy();
-
+  const cleanText = 'Clean all';
   it('is rendered', async () => {
     const { container } = render(
       <GlobalContext.Provider value={{ dispatch }}>
         <CleanPoints />
       </GlobalContext.Provider>
     );
-    expect(getByText(container, 'Очистить')).exist;
+    expect(getByText(container, cleanText)).exist;
   });
 
   it('is "cleaning"', async () => {
@@ -25,7 +25,7 @@ describe('CleanPoints (component)', function() {
         <CleanPoints />
       </GlobalContext.Provider>
     );
-    const cleanButton = getByText(container, 'Очистить');
+    const cleanButton = getByText(container, cleanText);
     fireEvent.click(cleanButton);
     expect(dispatch.called).to.be.true;
   });
