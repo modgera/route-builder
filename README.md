@@ -12,7 +12,7 @@ Google Maps config file is placed in this directory:
 src/services/Google/config.js.
 ```
 
-There you can place api key and set other params that valid for API.
+There you can place API key and set other params that valid for API.
 
 ```sh
 export const mapsParams = {
@@ -28,7 +28,7 @@ Yandex Map config file is placed in this directory:
 src/services/Yandex/config.js.
 ```
 
-There you can place api key and set other params that valid for API.
+There you can place API key and set other params that valid for API.
 
 ```sh
 export const mapsParams = {
@@ -57,7 +57,7 @@ Run all tests in debug mode:
 npm run test-debug
 ```
 
-Create bundle for prodaction:
+Create a bundle for production:
 
 ```sh
 npm run build
