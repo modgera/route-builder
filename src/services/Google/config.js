@@ -1,7 +1,7 @@
 export const baseUrl = 'https://maps.googleapis.com/maps/api/js?';
 
 export const mapsParams = {
-  key: 'AIzaSyByqU3ruwiUrAOP46BuOFJCG_5OUiM8ynA',
+  key: '',
   language: 'ru',
   region: 'RU',
 };
