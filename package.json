@@ -7,7 +7,6 @@
     "start": "webpack-dev-server --config webpack/webpack.config.js --env.env=dev --host=0.0.0.0 --public 192.168.1.33:8080 --open --history-api-fallback",
     "build": "webpack --config webpack/webpack.config.js --env.env=prod",
     "build:analyze": "npm run build -- --env.addon=bundleanalyze --env.addon=bundlevisualizer",
-    "jest": "cross-env NODE_ENV=test jest --watchAll",
     "test-debug": "karma start --log-level debug",
     "test": "karma start"
   },
