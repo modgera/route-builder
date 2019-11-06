@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --config webpack/webpack.config.js --env.env=dev --host=0.0.0.0 --public 192.168.1.33:8080 --open --history-api-fallback",
+    "start": "webpack-dev-server --config webpack/webpack.config.js --env.env=dev --open --history-api-fallback",
     "build": "webpack --config webpack/webpack.config.js --env.env=prod",
     "build:analyze": "npm run build -- --env.addon=bundleanalyze --env.addon=bundlevisualizer",
     "test-debug": "karma start --log-level debug",
@@ -76,7 +76,6 @@
     "@fortawesome/free-brands-svg-icons": "^5.11.2",
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
     "@fortawesome/react-fontawesome": "^0.1.6",
-    "gh-pages": "^2.1.1",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
